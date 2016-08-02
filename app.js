@@ -4,6 +4,7 @@ var swig = require('swig');
 var http = require('http');
 var routes = require('./routes/');
 var app = express();
+app.use(express.static('public'));
 
 app.use('/', routes);
 
@@ -47,7 +48,10 @@ app.engine('html', swig.renderFile); // when giving html files to res.render, te
 app.get('/views', function(request, response, next) {
   var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
   response.render('index', {title: 'Hall of Fame', people: people} );
-  //next();
+});
+
+app.get('/',function(request, response, next){
+  response.readFile(path.join(__dirname, '../public','/stylesheets/style.css'));
 });
 
 
