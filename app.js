@@ -1,5 +1,6 @@
 var express = require( 'express' );
 var morgan = require('morgan');
+var swig = require('swig');
 var app = express();
 
 app.listen(3000, function(){
@@ -25,7 +26,7 @@ app.use('/special/', function (request, response, next) {
     next();
 });
 
-app.get('/special', function(request, response,next) {
+app.get('/special', function(request, response, next) {
   response.send("you reached the special area.");
 });
 
@@ -33,4 +34,22 @@ app.get('/special/subpath', function(request, response,next) {
   response.send("you reached the special area. - subpath");
 });
 
-//testing
+swig.setDefaults({ cache: false });
+
+app.set('views', __dirname + '/views'); // point res.render to the proper directory
+app.set('view engine', 'html'); // have res.render work with html files
+app.engine('html', swig.renderFile); // when giving html files to res.render, tell it to use swig
+
+app.get('/views', function(request, response, next) {
+  var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+  response.render('index', {title: 'Hall of Fame', people: people} );
+  //next();
+});
+
+
+
+
+
+
+
+
