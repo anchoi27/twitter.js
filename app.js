@@ -1,7 +1,11 @@
 var express = require( 'express' );
 var morgan = require('morgan');
 var swig = require('swig');
+var http = require('http');
+var routes = require('./routes/');
 var app = express();
+
+app.use('/', routes);
 
 app.listen(3000, function(){
   console.log("server listening");
