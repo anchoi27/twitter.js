@@ -8,11 +8,12 @@ function add (name, content) {
 
 function list () {
   return _.cloneDeep(data);
-}
 
+}
 function find (properties) {
   return _.cloneDeep(_.filter(data, properties));
 }
+
 
 
 var randArrayEl = function(arr) {
@@ -34,7 +35,7 @@ var awesome_adj = ['awesome', 'breathtaking', 'amazing', 'funny', 'sweet', 'cool
 // };
 
 for (var k = 0; k < 3; k++) {
-  var theName = fakeFirsts[k] + " " + fakeLasts[k];
+  var theName = fakeFirsts[k];// + " " + fakeLasts[k];
   var theTweet = "Grace Hopper Academy is so much better. duh! " + awesome_adj[k];
   add(theName, theTweet);
 }
